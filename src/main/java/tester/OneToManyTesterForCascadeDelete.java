@@ -15,10 +15,11 @@ public class OneToManyTesterForCascadeDelete {
     {
         SessionFactory factory= HibUtils.getSessionFactory();
         Session session=factory.openSession();
-        Employee emp=session.get(Employee.class,1);
+        Employee emp=session.get(Employee.class,4);
 
         System.out.println("Size is "+emp.getAddressSet().size());
         Transaction tx=session.beginTransaction();
+        emp.getCompanySet().clear();
         session.remove(emp);
         tx.commit();
         session.close();
