@@ -13,11 +13,19 @@ public class Employee {
     private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "employee_id")
     private int id;
     private int phoneNumber;
 
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Address> addressSet;
+
+    @ManyToMany(mappedBy="employeeSet",cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
+    /*@JoinTable(name = "Company_Emp",joinColumns = {
+            @JoinColumn(name = "employee_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "company_id",
+                    nullable = false, updatable = false) })*/
+    private Set<Company>  companySet;
 
 
     public Employee() {
@@ -59,5 +67,23 @@ public class Employee {
 
     public void setAddressSet(Set<Address> addressSet) {
         this.addressSet = addressSet;
+    }
+
+    public Set<Company> getCompanySet() {
+        return companySet;
+    }
+
+    public void setCompanySet(Set<Company> companySet) {
+        this.companySet = companySet;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", phoneNumber=" + phoneNumber +
+                '}';
     }
 }

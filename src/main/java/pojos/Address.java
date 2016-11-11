@@ -16,8 +16,13 @@ public class Address {
     private String street;
     private int houseNumber;
     @ManyToOne()
-    @JoinColumn()
+    @JoinColumn(name="emp_id")
     private Employee employee;
+
+    @ManyToOne()
+    @JoinColumn(name="cmp_id")
+    private Company company;
+
 
     public Address() {
     }
@@ -51,5 +56,22 @@ public class Address {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", street='" + street + '\'' +
+                ", houseNumber=" + houseNumber +
+                '}';
     }
 }

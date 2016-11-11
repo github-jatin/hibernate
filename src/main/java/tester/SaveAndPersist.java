@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import pojos.Employee;
+import service.EmpService;
+import service.EmpServiceImpl;
 import utils.HibUtils;
 
 /**
@@ -19,6 +21,7 @@ public class SaveAndPersist
        /* System.out.println( "Hello World!" );
         EmpDao dao =new EmpDaoImpl();
         int id=dao.addEmp("Jatin",1234);*/
+
 
         SessionFactory  factory= HibUtils.getSessionFactory();
         Session session=factory.openSession();
